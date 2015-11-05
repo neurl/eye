@@ -1,4 +1,4 @@
-function outputdata = getalleyedata(datadir)
+function getalleyedata(datadir)
     %Runs importeyedata on all *_eye.tsv in specified folder.
     currdir = pwd;
     %Include '/' at the end of the path!
@@ -14,16 +14,19 @@ function outputdata = getalleyedata(datadir)
     %run importeyedata.m on each file and separate data and message
     for i = 1:length(fnames)
         try
+            disp(['Importing ' fnames{i}])
             raw = importeyedata(fnames{i});
-            output(i).subject = fnames{i}; %re_matches{1};
+            output(i).subject = fnames{i};
             output(i).data = raw.data;
             output(i).message = raw.message;
         catch 
             disp(['An error occurred while importing data from ' fnames{i}]);
+            output(i).subject = fnames{i};
             disp('Skipping this file.')
-            i = i+1;
+            continue
         end
     end
-    outputdata = output;
+    disp(['Saving data as eye_data.m in ' datadir])
+    save('eye_data', 'output');
     cd(currdir)
 end
