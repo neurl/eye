@@ -1,4 +1,4 @@
-function getalleyedata(datadir)
+function eye_data = getalleyedata(datadir)
     %Runs importeyedata on all *_eye.tsv in specified folder.
     currdir = pwd;
     %Include '/' at the end of the path!
@@ -27,6 +27,7 @@ function getalleyedata(datadir)
         end
     end
     disp(['Saving data as eye_data.m in ' datadir])
+    eye_data = output;
     save('eye_data', 'output');
     cd(currdir)
 end
