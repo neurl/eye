@@ -1,5 +1,11 @@
 function erp = compute_erp(iEvent, pd, T, BL, name, sampling_rate)
-
+%iEvent = is the output of compute_iEvent (times in eye data of the message
+%of interest)
+%T = 
+%BL = baseline start and end
+%pd = is pupil diameter input (or any eye data parameter)
+%name = name of erp if needed
+%sampling_rate = eye tracker sampling rate (in Hz)
 
 if isempty(iEvent)
     D = nan(1, ...
@@ -12,7 +18,7 @@ if isempty(iEvent)
 end
 
 if ~exist('sampling_rate')
-    sampling_rate = 60;
+    sampling_rate = 30;
 end
 
 pre_time = T(1);
@@ -67,10 +73,10 @@ for i = 1:length(iStart)
 end
 
 tm = [T(1):1/sampling_rate:T(2)];
-erp.D           = D;
-erp.Db          = Db;
-erp.y           = squeeze(nanmean(Db,3));
-erp.y_nb        = squeeze(nanmean(D,3));
+erp.D           = D; %eye data for every trial
+erp.Db          = Db; %baseline corrected(?)
+erp.y           = squeeze(nanmean(Db,3)); %average baseline
+erp.y_nb        = squeeze(nanmean(D,3)); %without baseline
 erp.type        = name;
 erp.tEvent      = tEvent;
 erp.tEnd        = tEnd;
