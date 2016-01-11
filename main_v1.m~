@@ -10,7 +10,7 @@ cd(fundir);
 cd(datadir);
 d = dir('*.mat');
 
-sn = 1;
+sn = 2;
 beh_name = d(sn).name;
 eye_name = [d(sn).name(1:end-4) '_eye.tsv'];
 load(beh_name);
@@ -24,9 +24,7 @@ fid = fopen(eye_name);
 
 X = textscan(fid, '%s', 'delimiter', '\n');
 fclose(fid);
-T = textscan(X{1}{1}, '%s', 'delimiter', '\t');
-
-
+%%
 Y = strvcat(X{1}{:});
 ind_mess = Y(:,1) == 'M';
 M = {X{1}{ind_mess}};
@@ -35,31 +33,14 @@ Z = {Z{2:end}};
 A = strvcat(Z{:});
 B = textscan(A','%s%s%f%s%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f');
 
-E = strvcat(B{2});
-sc = str2num(E(:,end-5:end));
-mn = str2num(E(:,end-8:end-7))*60;
-hr = str2num(E(:,end-11:end-10))*60*60;
-tm = hr+mn+sc;
-
-eye_data.tm = tm;
-eye_data.pd_raw = [B{15} B{22}];
-
-eye_data.var_names = {T{1}{4:end}};
 
 
-% messages
 C = strvcat(M{:});
 C = C(2:end,:);
 D = textscan(C','%s%s%s%s%s');
 E = strvcat(D{3});
-sc = str2num(E(:,end-5:end));
-mn = str2num(E(:,end-8:end-7))*60;
-hr = str2num(E(:,end-11:end-10))*60*60;
-tm = hr+mn+sc;
-
-
-mess.tm = tm;
-mess.str = D{5};
+sec = str2num(E(:,end-5:end));
+mnstr2num(E(:,end-8:end-7))
 
 
 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s

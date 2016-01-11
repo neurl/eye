@@ -1,4 +1,4 @@
-function [m, s, mRT, sRT] = compute_psychometricCurve_medianSplitRTs(data, d_vals)
+function [m, s, mRT, sRT] = compute_psychometricCurve_medianSplitRTs(data, d_vals, RTmax)
 
 df = [data.nR] - [data.nL];
 
@@ -27,10 +27,12 @@ for i = 1:length(d_vals)
     
     % RT
     Y1 = [D(i1).RT];
+    Y1 = Y1(Y1<RTmax);
     mRT(i,1) = mean(Y1);
     sRT(i,1) = std(Y1) / sqrt(sum(i1));
     
     Y2 = [D(i2).RT];
+    Y2 = Y2(Y2<RTmax);
     mRT(i,2) = mean(Y2);
     sRT(i,2) = std(Y2) / sqrt(sum(i2));
 end

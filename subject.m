@@ -73,13 +73,13 @@ classdef subject < handle
             
             % remove events after pupil loss
             
-            if ~isempty(min(find(diff(tm)==0)))
-                idx = 1:min(find(diff(tm)==0));
-                tm = tm(idx);
-                str = {D{4}{idx}};
-            else
+            %if ~isempty(min(find(diff(tm)==0)))
+            %   idx = 1:min(find(diff(tm)==0));
+            %   tm = tm(idx);
+            %   str = {D{4}{idx}};
+            %else
                 str = D{4};
-            end
+            %end
             mess.tm = tm;
             mess.str = str;
             
