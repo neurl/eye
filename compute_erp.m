@@ -1,5 +1,7 @@
 function erp = compute_erp(iEvent, pd, T, BL, name, sampling_rate)
 
+pre_time = T(1);
+post_time = T(2);
 
 if isempty(iEvent)
     D = nan(1, ...
@@ -15,8 +17,7 @@ if ~exist('sampling_rate')
     sampling_rate = 60;
 end
 
-pre_time = T(1);
-post_time = T(2);
+
 
 bl_start = BL(1);
 bl_end = BL(2);
